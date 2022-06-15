@@ -1,44 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { VehicleService } from '../../services/vehicle.service';
+import { VisitorService } from '../../services/visitor.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-vehicle-details',
-  templateUrl: './vehicle-details.component.html',
-  styleUrls: ['./vehicle-details.component.scss']
+  selector: 'app-visitor-details',
+  templateUrl: './visitor-details.component.html',
+  styleUrls: ['./visitor-details.component.scss']
 })
-
-export class VehicleDetailsComponent implements OnInit {
+export class VisitorDetailsComponent implements OnInit {
 
   constructor(
-    private vehicleService: VehicleService,
+    private visitorService: VisitorService,
     private router: Router,
     private form: FormBuilder,
   ) { }
 
   ngOnInit(): void {
-
   }
 
   changePage(x: string){
     this.router.navigate([x])
   }
 
-  vehicleForm = this.form.group({
-    placa: [null,[Validators.required]],
-    marca: [null,[Validators.required]],
-    modelo: [null,Validators.required],
-    cor: [null,Validators.required],
+  visitorForm = this.form.group({
+    visitante: [null,[Validators.required]],
+    rg: [null,[Validators.required]],
+    cpf: [null,Validators.required],
+    telefone1: [null,Validators.required],
+    telefone2: [],
+    observacoes: [],
     idApartamento: [null,Validators.required]
   });
 
   verForm(){
-    console.log(this.vehicleForm.value);
+    console.log(this.visitorForm.value);
   }
 
   salvar() {
-    this.vehicleService.createVehicle(this.vehicleForm.value).subscribe({
+    this.visitorService.createVisitor(this.visitorForm.value).subscribe({
       next: (response) => {
         console.log(response);
       },
@@ -50,7 +50,7 @@ export class VehicleDetailsComponent implements OnInit {
 
   ler() {
     console.log("teste");
-    this.vehicleService.getVehicleByPlaca("Mary").subscribe({
+    this.visitorService.getVisitorByName("Mary").subscribe({
       next: (response) => {
         console.log(response);
       }

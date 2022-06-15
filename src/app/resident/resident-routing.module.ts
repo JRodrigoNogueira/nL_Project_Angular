@@ -5,7 +5,7 @@ import { ResidentPainelComponent } from './components/resident-painel/resident-p
 
 const routes: Routes = [
   { path: "", component: ResidentPainelComponent },
-  { path: "details", component: ResidentDetailsComponent },
+  { path: ":id", component: ResidentDetailsComponent },
 ];
 
 @NgModule({

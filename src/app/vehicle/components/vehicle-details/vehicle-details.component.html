@@ -1,1 +1,99 @@
-<p>vehicle-details works!</p>
+<div class="container">
+  <div class="wrapper">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="changePage('resident/details')"
+    >
+      Moradores
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="changePage('vehicle/details')"
+    >
+      Veículos
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="changePage('visitor/details')"
+    >
+      Visitantes
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="changePage('employee/details')"
+    >
+      Funcionarios
+    </button>
+  </div>
+
+  <div class="layout">
+    <div class="img">
+      <img src="./assets/imgs/NL.jpg" alt="New Life Condomínio" />
+    </div>
+
+    <form class="full-width" [formGroup]="vehicleForm">
+      <div class="form">
+        <div class="full-width" fxLayout="row" id="linha1">
+          <mat-form-field fxFill appearance="outline" fxFlex="30%">
+            <mat-label> Apartamento </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="idApartamento"
+              id="idApartamento"
+            />
+          </mat-form-field>
+        </div>
+
+        <div
+          class="full-width"
+          fxLayout="row"
+          fxLayoutAlign="space-between"
+          id="linha2"
+        >
+          <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
+            <mat-label> Placa </mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="placa"
+              id="placa"
+              maxlength="7"
+              minlength="7"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
+            <mat-label> Marca </mat-label>
+            <input matInput type="text" formControlName="marca" id="marca" />
+          </mat-form-field>
+          <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
+            <mat-label> Modelo </mat-label>
+            <input matInput type="text" formControlName="modelo" id="modelo" />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
+            <mat-label> Cor </mat-label>
+            <input matInput type="text" formControlName="cor" id="cor" />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="btns">
+    <button mat-raised-button color="primary" routerLink="">Voltar</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="salvar()"
+      [disabled]="!vehicleForm.valid"
+    >
+      Salvar
+    </button>
+  </div>
+</div>

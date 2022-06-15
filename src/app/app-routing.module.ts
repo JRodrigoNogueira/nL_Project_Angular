@@ -13,6 +13,10 @@ const routes: Routes = [
         loadChildren: () => import('./resident/resident.module').then(m => m.ResidentModule)},
       { path: 'vehicle',
         loadChildren: () => import('./vehicle/vehicle.module').then(m => m.VehicleModule)},
+      { path: 'visitor',
+        loadChildren: () => import('./visitor/visitor.module').then(m => m.VisitorModule)},
+      { path: 'employee',
+        loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule)},
     ]
 },
   { path: '**', component: PageNotFoundComponent }

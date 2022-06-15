@@ -1,1 +1,142 @@
-<p>vehicle-painel works!</p>
+<div class="page" fxLayout="column" fxLayoutGap="30px">
+
+  <div class="wrapper">
+    <button mat-raised-button color="primary" routerLink="../resident">Moradores</button>
+    <button mat-raised-button color="accent" routerLink="../vehicle">Veículos</button>
+    <button mat-raised-button color="primary" routerLink="../visitor">Visitantes</button>
+    <button mat-raised-button color="primary" routerLink="../employee">Funcionarios</button>
+  </div>
+
+  <div
+    class="full-width"
+    fxLayout="row"
+    fxLayoutGap="1em"
+    fxLayoutAlign="center"
+    fxFlexFill
+  >
+    <div class="center">
+      <mat-icon>search</mat-icon>
+    </div>
+    <div fxFlex="65">
+      <mat-form-field fxFill appearance="legacy">
+        <mat-label>Filtro</mat-label>
+        <input matInput type="text" [formControl]="filterControl" />
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="15">
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="new"
+        style="width: 100%"
+      >
+        Adicionar
+      </button>
+    </div>
+
+  </div>
+
+  <div class="tableForm">
+
+    <table
+      mat-table
+      [dataSource]="vehicleDataTable"
+      class="full-width"
+      aria-describedby="List of vehicles"
+    >
+      <ng-container matColumnDef="placa">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="table-header">
+            Placa
+          </span>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element?.placa }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="table-header">
+            Marca
+          </span>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element?.marca }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="modelo">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="table-header">
+            Modelo
+          </span>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element?.modelo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cor">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="table-header">
+            Cor
+          </span>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element?.cor }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="idApartamento">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="table-header">
+            Apartamento
+          </span>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element?.idApartamento }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="text-align: center !important"
+        >
+          <span class="table-header">Ação</span>
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          style="text-align: center !important"
+        >
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="deletar(element?.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            [routerLink]="element.id"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <div class="center">
+      <mat-paginator
+        [length]="totalLength"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[5, 10, 50, 100]"
+        (page)="pageChange($event)"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    </div>
+
+    <div class="center">
+      <button mat-raised-button color="primary" routerLink="">Voltar</button>
+    </div>
+
+  </div>
+</div>
+

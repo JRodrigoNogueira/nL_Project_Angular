@@ -2,7 +2,7 @@
   <div class="wrapper">
     <button
       mat-raised-button
-      color="accent"
+      color="primary"
       (click)="changePage('resident/details')"
     >
       Moradores
@@ -23,7 +23,7 @@
     </button>
     <button
       mat-raised-button
-      color="primary"
+      color="accent"
       (click)="changePage('employee/details')"
     >
       Funcionarios
@@ -32,11 +32,12 @@
 
   <div class="layout">
     <div class="img">
-      <img src="./assets/imgs/NL.jpg" alt="New Life Condomínio" />
+      <img src="./assets/imgs/NL.jpg" alt="New Life Condomínio">
     </div>
 
-    <form class="full-width" [formGroup]="residentForm">
+  <form class="full-width" [formGroup]="employeeForm">
       <div class="form">
+
         <div
           class="full-width"
           fxLayout="row"
@@ -45,22 +46,12 @@
         >
           <mat-form-field fxFill appearance="outline" fxFlex="30%">
             <mat-label> Apartamento </mat-label>
-            <input
-              matInput
-              type="text"
-              formControlName="idApartamento"
-              id="idApartamento"
-            />
+            <input matInput type="text" formControlName="idApartamento" id="idApartamento" />
           </mat-form-field>
 
           <mat-form-field fxFill appearance="outline" fxFlex="65%">
-            <mat-label> Morador </mat-label>
-            <input
-              matInput
-              type="text"
-              formControlName="morador"
-              id="morador"
-            />
+            <mat-label> Funcionario </mat-label>
+            <input matInput type="text" formControlName="funcionario" id="funcionario" />
           </mat-form-field>
         </div>
         <div
@@ -76,7 +67,12 @@
 
           <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
             <mat-label> CPF </mat-label>
-            <input matInput type="text" formControlName="cpf" id="cpf" />
+            <input
+              matInput
+              type="text"
+              formControlName="cpf"
+              id="cpf"
+            />
           </mat-form-field>
 
           <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
@@ -100,45 +96,11 @@
           </mat-form-field>
         </div>
 
-        <div class="full-width" fxLayout="row" id="linha3">
-          <mat-form-field fxFill appearance="outline" fxFlex="70%">
-            <mat-label> Email </mat-label>
-            <input matInput type="text" formControlName="email" id="email" />
-          </mat-form-field>
-        </div>
-
-        <div
-          class="full-width"
-          fxLayout="row"
-          fxLayoutAlign="space-between"
-          id="linha4"
-        >
-          <mat-form-field fxFill appearance="outline" fxFlex="70%">
-            <mat-label> Contato Emergência </mat-label>
-            <input
-              matInput
-              type="text"
-              formControlName="contatoEmergencia"
-              id="contatoEmergencia"
-            />
-          </mat-form-field>
-
-          <mat-form-field fxFill appearance="outline" fxFlex="25%">
-            <mat-label> Telefone </mat-label>
-            <input
-              matInput
-              type="text"
-              formControlName="telefoneEmergencia"
-              id="telefoneEmergencia"
-            />
-          </mat-form-field>
-        </div>
-
         <div
           class="full-width"
           fxLayout="row"
           fxLayoutAlign="space-around center"
-          id="linha5"
+          id="linha3"
         >
           <mat-form-field fxFill appearance="outline" fxFlex="100%">
             <mat-label> Observações </mat-label>
@@ -154,15 +116,17 @@
     </form>
   </div>
 
+
+
   <div class="btns">
     <button mat-raised-button color="primary" routerLink="">Voltar</button>
     <button
-      mat-raised-button
-      color="primary"
-      (click)="salvar()"
-      [disabled]="!residentForm.valid"
-    >
-      Salvar
-    </button>
+        mat-raised-button
+        color="primary"
+        (click)="salvar()"
+        [disabled]="!employeeForm.valid"
+      >
+        Salvar
+      </button>
   </div>
 </div>

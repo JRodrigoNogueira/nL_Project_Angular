@@ -3,17 +3,17 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime } from 'rxjs';
-import { ResidentService } from '../../services/resident.service';
+import { VisitorService } from '../../services/visitor.service';
 
 @Component({
-  selector: 'app-resident-painel',
-  templateUrl: './resident-painel.component.html',
-  styleUrls: ['./resident-painel.component.scss']
+  selector: 'app-visitor-painel',
+  templateUrl: './visitor-painel.component.html',
+  styleUrls: ['./visitor-painel.component.scss']
 })
-export class ResidentPainelComponent implements OnInit {
+export class VisitorPainelComponent implements OnInit {
 
   constructor(
-    private residentService: ResidentService,
+    private visitorService: VisitorService,
     private form: FormBuilder,
   ) { }
 
@@ -22,28 +22,25 @@ export class ResidentPainelComponent implements OnInit {
   pageSize = 10;
   page = 0;
 
-  residentDataTable = new MatTableDataSource();
-  displayedColumns = ['morador', 'rg', 'cpf', 'telefone1', 'telefone2', 'email', 'contatoEmergencia', 'telefoneEmergencia', 'idApartamento','action'];
+  visitorDataTable = new MatTableDataSource();
+  displayedColumns = ['visitante', 'rg', 'cpf', 'telefone1', 'telefone2', 'idApartamento','action'];
 
-  residentForm = this.form.group({
-    morador: [null,[Validators.required]],
+  visitorForm = this.form.group({
+    visitante: [null,[Validators.required]],
     rg: [null,[Validators.required]],
     cpf: [null,Validators.required],
     telefone1: [null,Validators.required],
     telefone2: [],
-    email: [null,[Validators.required, Validators.email]],
-    contatoEmergencia: [],
-    telefoneEmergencia: [],
     observacoes: [],
     idApartamento: [null,Validators.required]
   });
 
   pageChange(pageEvent: PageEvent) {
-    this.residentService
+    this.visitorService
       .findAllPaginated(pageEvent, this.filterControl.value)
       .subscribe({
         next: (response) => {
-          this.residentDataTable.data = response.content;
+          this.visitorDataTable.data = response.content;
           this.totalLength = response.totalElements;
           this.pageSize = response.size;
           this.page = pageEvent.pageIndex;
@@ -54,14 +51,14 @@ export class ResidentPainelComponent implements OnInit {
 
   ngOnInit(): void {
 
-      this.filterControl.valueChanges.pipe(debounceTime(1000)).subscribe(query => {
-      this.residentService.findAllPaginated({
+      this.filterControl.valueChanges.pipe().subscribe(query => {
+      this.visitorService.findAllPaginated({
         pageIndex: this.page,
         pageSize: this.pageSize,
         length: this.totalLength,
       },
        query).subscribe(response => {
-        this.residentDataTable.data = response.content;
+        this.visitorDataTable.data = response.content;
       });
     })
 

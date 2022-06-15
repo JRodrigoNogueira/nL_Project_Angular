@@ -5,7 +5,7 @@ import { VehiclePainelComponent } from './components/vehicle-painel/vehicle-pain
 
 const routes: Routes = [
   { path: "", component: VehiclePainelComponent },
-  { path: "details", component: VehicleDetailsComponent },
+  { path: ":id", component: VehicleDetailsComponent },
 ];
 
 @NgModule({

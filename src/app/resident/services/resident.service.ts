@@ -6,17 +6,17 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class VehicleService {
+export class ResidentService {
 
   constructor(private http: HttpClient) {}
 
-  getVehicleByPlaca(id: string) {
-    let params = new HttpParams().append('placa', id);
-    return this.http.get<any>(`${environment.apiUrl}/veiculo`,{params});
+  getResidentByName(id: string) {
+    let params = new HttpParams().append('name', id);
+    return this.http.get<any>(`${environment.apiUrl}/resident`,{params});
   }
 
- createVehicle(formData: Object) {
-    return this.http.post<any>(`${environment.apiUrl}/veiculo`, formData);
+  createVehicle(formData: Object) {
+    return this.http.post<any>(`${environment.apiUrl}/morador`, formData);
   }
 
   findAllPaginated(
@@ -26,10 +26,13 @@ export class VehicleService {
       .append('page', pager.pageIndex)
       .append('size', pager.pageSize);
     if (query) params = params.append('query', query);
-    return this.http.get<any>(`${environment.apiUrl}/veiculo/allVeiculos`, { params });
+    return this.http.get<any>(`${environment.apiUrl}/morador/allMoradores`, { params });
   }
 
-  /*
+  /* createCustomer(formData: Object) {
+    return this.http.post<any>(`${environment.apiUrl}/api/customer/`, formData);
+  }
+
   updateCustomer(formData: Object, id: number) {
     return this.http.put<any>(`${environment.apiUrl}/api/customer/${id}`, formData);
   }
@@ -41,6 +44,4 @@ export class VehicleService {
   findCustomerByDescription(customer: Object) {
     return this.http.get<any>(`${environment.apiUrl}/api/customer/findByDescription/`, customer);
   } */
-
-
 }
