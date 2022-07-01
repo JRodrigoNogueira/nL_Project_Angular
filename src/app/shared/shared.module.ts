@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
@@ -17,7 +18,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
-var module = [
+const module = [
   MatButtonModule,
   MatIconModule,
   MatToolbarModule,
@@ -31,6 +32,7 @@ var module = [
   ReactiveFormsModule,
   MatTableModule,
   MatPaginatorModule,
+  MatSelectModule,
 ];
 
 @NgModule({

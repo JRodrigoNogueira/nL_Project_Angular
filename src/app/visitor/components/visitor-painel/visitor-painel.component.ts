@@ -8,14 +8,13 @@ import { VisitorService } from '../../services/visitor.service';
 @Component({
   selector: 'app-visitor-painel',
   templateUrl: './visitor-painel.component.html',
-  styleUrls: ['./visitor-painel.component.scss']
+  styleUrls: ['./visitor-painel.component.scss'],
 })
 export class VisitorPainelComponent implements OnInit {
-
   constructor(
     private visitorService: VisitorService,
-    private form: FormBuilder,
-  ) { }
+    private form: FormBuilder
+  ) {}
 
   filterControl = new FormControl('');
   totalLength!: number;
@@ -23,16 +22,24 @@ export class VisitorPainelComponent implements OnInit {
   page = 0;
 
   visitorDataTable = new MatTableDataSource();
-  displayedColumns = ['visitante', 'rg', 'cpf', 'telefone1', 'telefone2', 'idApartamento','action'];
+  displayedColumns = [
+    'visitante',
+    'rg',
+    'cpf',
+    'telefone1',
+    'telefone2',
+    'idApartamento',
+    'action',
+  ];
 
   visitorForm = this.form.group({
-    visitante: [null,[Validators.required]],
-    rg: [null,[Validators.required]],
-    cpf: [null,Validators.required],
-    telefone1: [null,Validators.required],
+    visitante: [null, [Validators.required]],
+    rg: [null, [Validators.required]],
+    cpf: [null, Validators.required],
+    telefone1: [null, Validators.required],
     telefone2: [],
     observacoes: [],
-    idApartamento: [null,Validators.required]
+    idApartamento: [null, Validators.required],
   });
 
   pageChange(pageEvent: PageEvent) {
@@ -45,33 +52,44 @@ export class VisitorPainelComponent implements OnInit {
           this.pageSize = response.size;
           this.page = pageEvent.pageIndex;
         },
-        error: () => console.log("Erro ao carregar tabela.")
+        error: () => console.log('Erro ao carregar tabela.'),
       });
   }
 
   ngOnInit(): void {
-
-      this.filterControl.valueChanges.pipe().subscribe(query => {
-      this.visitorService.findAllPaginated({
-        pageIndex: this.page,
-        pageSize: this.pageSize,
-        length: this.totalLength,
-      },
-       query).subscribe(response => {
-        this.visitorDataTable.data = response.content;
-      });
-    })
+    this.filterControl.valueChanges.pipe(debounceTime(1000)).subscribe((query) => {
+      this.visitorService
+        .findAllPaginated(
+          {
+            pageIndex: this.page,
+            pageSize: this.pageSize,
+            length: this.totalLength,
+          },
+          query
+        )
+        .subscribe((response) => {
+          this.visitorDataTable.data = response.content;
+        });
+    });
 
     this.pageChange({
       pageIndex: this.page,
       pageSize: this.pageSize,
       length: this.totalLength,
     });
-
   }
 
-  deletar(n: number) {
-    console.log(n);
+  deletar(data: any) {
+    if (confirm(`Confirma a deleção do(a) visitante(a) ${data.visitante}?`)) {
+      this.visitorService.deleteVisitor(data.id).subscribe({
+        next: () => {
+          this.pageChange({
+            pageIndex: this.page,
+            pageSize: this.pageSize,
+            length: this.totalLength,
+          });
+        },
+      });
+    }
   }
-
 }

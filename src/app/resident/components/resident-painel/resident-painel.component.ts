@@ -8,14 +8,13 @@ import { ResidentService } from '../../services/resident.service';
 @Component({
   selector: 'app-resident-painel',
   templateUrl: './resident-painel.component.html',
-  styleUrls: ['./resident-painel.component.scss']
+  styleUrls: ['./resident-painel.component.scss'],
 })
 export class ResidentPainelComponent implements OnInit {
-
   constructor(
     private residentService: ResidentService,
-    private form: FormBuilder,
-  ) { }
+    private form: FormBuilder
+  ) {}
 
   filterControl = new FormControl('');
   totalLength!: number;
@@ -23,19 +22,30 @@ export class ResidentPainelComponent implements OnInit {
   page = 0;
 
   residentDataTable = new MatTableDataSource();
-  displayedColumns = ['morador', 'rg', 'cpf', 'telefone1', 'telefone2', 'email', 'contatoEmergencia', 'telefoneEmergencia', 'idApartamento','action'];
+  displayedColumns = [
+    'morador',
+    'rg',
+    'cpf',
+    'telefone1',
+    'telefone2',
+    'email',
+    'contatoEmergencia',
+    'telefoneEmergencia',
+    'idApartamento',
+    'action',
+  ];
 
   residentForm = this.form.group({
-    morador: [null,[Validators.required]],
-    rg: [null,[Validators.required]],
-    cpf: [null,Validators.required],
-    telefone1: [null,Validators.required],
+    morador: [null, [Validators.required]],
+    rg: [null, [Validators.required]],
+    cpf: [null, Validators.required],
+    telefone1: [null, Validators.required],
     telefone2: [],
-    email: [null,[Validators.required, Validators.email]],
+    email: [null, [Validators.required, Validators.email]],
     contatoEmergencia: [],
     telefoneEmergencia: [],
     observacoes: [],
-    idApartamento: [null,Validators.required]
+    idApartamento: [null, Validators.required],
   });
 
   pageChange(pageEvent: PageEvent) {
@@ -48,33 +58,46 @@ export class ResidentPainelComponent implements OnInit {
           this.pageSize = response.size;
           this.page = pageEvent.pageIndex;
         },
-        error: () => console.log("Erro ao carregar tabela.")
+        error: () => console.log('Erro ao carregar tabela.'),
       });
   }
 
   ngOnInit(): void {
-
-      this.filterControl.valueChanges.pipe(debounceTime(1000)).subscribe(query => {
-      this.residentService.findAllPaginated({
-        pageIndex: this.page,
-        pageSize: this.pageSize,
-        length: this.totalLength,
-      },
-       query).subscribe(response => {
-        this.residentDataTable.data = response.content;
+    this.filterControl.valueChanges
+      .pipe(debounceTime(1000))
+      .subscribe((query) => {
+        this.residentService
+          .findAllPaginated(
+            {
+              pageIndex: this.page,
+              pageSize: this.pageSize,
+              length: this.totalLength,
+            },
+            query
+          )
+          .subscribe((response) => {
+            this.residentDataTable.data = response.content;
+          });
       });
-    })
 
     this.pageChange({
       pageIndex: this.page,
       pageSize: this.pageSize,
       length: this.totalLength,
     });
-
   }
 
-  deletar(n: number) {
-    console.log(n);
+  deletar(data: any) {
+    if (confirm(`Confirma a deleção do(a) morador(a) ${data.morador}?`)){
+      this.residentService.deleteResident(data.id).subscribe({
+        next: () => {
+          this.pageChange({
+            pageIndex: this.page,
+            pageSize: this.pageSize,
+            length: this.totalLength,
+          });
+        },
+      });
+    }
   }
-
 }

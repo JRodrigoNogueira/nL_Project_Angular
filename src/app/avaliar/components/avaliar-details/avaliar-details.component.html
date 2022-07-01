@@ -1,0 +1,85 @@
+<div class="container">
+
+  <div class="info-wrapper">
+
+    <div class="title-wrapper">
+      <h1>iService</h1>
+      <mat-icon>info</mat-icon>
+    </div>
+
+    <div class="wrapper">
+      <h1>Avaliar Empresa</h1>
+    </div>
+
+      <form [formGroup]="avaliacaoForm">
+        <div class="form">
+
+          <div
+            class="full-width"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+            id="linha1"
+          >
+            <mat-form-field fxFill  fxFlex="100%">
+              <mat-label> Comentário </mat-label>
+              <input matInput type="text" formControlName="comentario" id="comentario" />
+            </mat-form-field>
+          </div>
+
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center"
+            id="linha2"
+          >
+            <mat-form-field fxFill appearance="outline" fxFlex="15%">
+              <mat-label> Nota </mat-label>
+              <input matInput type="number" min="1" max="5" formControlName="nota" id="nota" placeholder="1-5"/>
+            </mat-form-field>
+          </div>
+
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center"
+            id="linha3"
+          >
+            <mat-form-field fxFill appearance="outline" fxFlex="30%">
+              <mat-label> Identificação de Pessoa Física  </mat-label>
+              <input matInput type="text" formControlName="pessoaFisicaId" id="pessoaFisica" [(ngModel)]="pessoaFisicaId" readonly/>
+            </mat-form-field>
+          </div>
+
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center"
+            id="linha4"
+          >
+            <mat-form-field fxFill appearance="outline" fxFlex="30%">
+              <mat-label> Identificação de Pessoa Juridica </mat-label>
+              <input matInput type="text" formControlName="pessoaJuridicaId" id="pessoaJuridica" [(ngModel)]="pessoaJuridicaId" readonly/>
+            </mat-form-field>
+          </div>
+
+          </div>
+      </form>
+
+    <div class="btns">
+      <button mat-raised-button class="grad"
+      routerLink=""
+      >
+      Voltar
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="criar()"
+        [disabled]="!avaliacaoForm.valid"
+      >
+        Enviar Avaliação
+      </button>
+    </div>
+
+  </div>
+
+
+
+</div>

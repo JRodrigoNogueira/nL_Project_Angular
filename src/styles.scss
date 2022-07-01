@@ -49,8 +49,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   flex-direction: column;
 
   gap: 50px;
-
-  border-top: 3px solid black;
 }
 
 .btns {
@@ -86,7 +84,6 @@ img {
 
 
 .page {
-  border-top: 3px solid black;
   margin: 0;
   padding: 0;
 }
@@ -103,4 +100,21 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* @media (min-width: 768px) {
+  img {
+    display: none
+  }
+} */
+
+table {
+  background-color: black;
+}
+
+.sb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
 }

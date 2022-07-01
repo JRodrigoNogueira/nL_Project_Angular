@@ -29,4 +29,16 @@ export class EmployeeService {
     return this.http.get<any>(`${environment.apiUrl}/funcionario/allFuncionarios`, { params });
   }
 
+  deleteEmployee(id: number) {
+    return this.http.delete<any>(`${environment.apiUrl}/funcionario/${id}`);
+  }
+
+  getEmployeeById(id: number){
+    return this.http.get<any>(`${environment.apiUrl}/funcionario/${id}`);
+  }
+
+  updateEmployee(formData: Object, id: number) {
+    return this.http.put<any>(`${environment.apiUrl}/funcionario/${id}`, formData);
+  }
+
 }

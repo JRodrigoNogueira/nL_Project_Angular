@@ -83,8 +83,18 @@ export class VehiclePainelComponent implements OnInit {
     });
   }
 
-  deletar(n: number) {
-    console.log(n);
+  deletar(data: any) {
+    if (confirm(`Confirma a deleção do veículo de placa ${data.placa}?`)){
+      this.vehicleService.deleteVehicle(data.id).subscribe({
+        next: () => {
+          this.pageChange({
+            pageIndex: this.page,
+            pageSize: this.pageSize,
+            length: this.totalLength,
+          });
+        },
+      });
+    }
   }
 
 }

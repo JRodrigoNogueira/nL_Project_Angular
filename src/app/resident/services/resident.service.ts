@@ -12,10 +12,10 @@ export class ResidentService {
 
   getResidentByName(id: string) {
     let params = new HttpParams().append('name', id);
-    return this.http.get<any>(`${environment.apiUrl}/resident`,{params});
+    return this.http.get<any>(`${environment.apiUrl}/morador/nome`,{params});
   }
 
-  createVehicle(formData: Object) {
+  createResident(formData: Object) {
     return this.http.post<any>(`${environment.apiUrl}/morador`, formData);
   }
 
@@ -29,19 +29,15 @@ export class ResidentService {
     return this.http.get<any>(`${environment.apiUrl}/morador/allMoradores`, { params });
   }
 
-  /* createCustomer(formData: Object) {
-    return this.http.post<any>(`${environment.apiUrl}/api/customer/`, formData);
+  deleteResident(id: number) {
+    return this.http.delete<any>(`${environment.apiUrl}/morador/${id}`);
   }
 
-  updateCustomer(formData: Object, id: number) {
-    return this.http.put<any>(`${environment.apiUrl}/api/customer/${id}`, formData);
+  getResidentById(id: number){
+    return this.http.get<any>(`${environment.apiUrl}/morador/${id}`);
   }
 
-  deleteCustomer(id: number) {
-    return this.http.delete<any>(`${environment.apiUrl}/api/customer/${id}`);
+  updateResident(formData: Object, id: number) {
+    return this.http.put<any>(`${environment.apiUrl}/morador/${id}`, formData);
   }
-
-  findCustomerByDescription(customer: Object) {
-    return this.http.get<any>(`${environment.apiUrl}/api/customer/findByDescription/`, customer);
-  } */
 }

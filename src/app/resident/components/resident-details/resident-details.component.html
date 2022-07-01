@@ -3,28 +3,28 @@
     <button
       mat-raised-button
       color="accent"
-      (click)="changePage('resident/details')"
+      (click)="changePage('resident/new')"
     >
       Moradores
     </button>
     <button
       mat-raised-button
       color="primary"
-      (click)="changePage('vehicle/details')"
+      (click)="changePage('vehicle/new')"
     >
       Veículos
     </button>
     <button
       mat-raised-button
       color="primary"
-      (click)="changePage('visitor/details')"
+      (click)="changePage('visitor/new')"
     >
       Visitantes
     </button>
     <button
       mat-raised-button
       color="primary"
-      (click)="changePage('employee/details')"
+      (click)="changePage('employee/new')"
     >
       Funcionarios
     </button>
@@ -43,15 +43,16 @@
           fxLayoutAlign="space-between"
           id="linha1"
         >
-          <mat-form-field fxFill appearance="outline" fxFlex="30%">
+          <div fxFill appearance="outline" fxFlex="30%">
             <mat-label> Apartamento </mat-label>
-            <input
-              matInput
-              type="text"
+            <select
+
               formControlName="idApartamento"
               id="idApartamento"
-            />
-          </mat-form-field>
+            >
+            <option></option>
+            </select>
+          </div>
 
           <mat-form-field fxFill appearance="outline" fxFlex="65%">
             <mat-label> Morador </mat-label>
@@ -71,12 +72,23 @@
         >
           <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
             <mat-label> RG </mat-label>
-            <input matInput type="text" formControlName="rg" id="rg" />
+            <input
+              matInput
+              type="text"
+              formControlName="rg"
+              [textMask]="{ mask: rgMask }"
+              id="rg"
+            />
           </mat-form-field>
 
           <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
             <mat-label> CPF </mat-label>
-            <input matInput type="text" formControlName="cpf" id="cpf" />
+            <input
+              formControlName="cpf"
+              matInput
+              id="cpf"
+              [textMask]="{ mask: cpfMask }"
+            />
           </mat-form-field>
 
           <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
@@ -85,6 +97,7 @@
               matInput
               type="text"
               formControlName="telefone1"
+              [textMask]="{ mask: telefoneMask }"
               id="telefone1"
             />
           </mat-form-field>
@@ -95,6 +108,7 @@
               matInput
               type="text"
               formControlName="telefone2"
+              [textMask]="{ mask: telefoneMask }"
               id="telefone2"
             />
           </mat-form-field>
@@ -129,6 +143,7 @@
               matInput
               type="text"
               formControlName="telefoneEmergencia"
+              [textMask]="{ mask: telefoneMask }"
               id="telefoneEmergencia"
             />
           </mat-form-field>
@@ -159,10 +174,10 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="salvar()"
+      (click)="isEdit ? atualizar() : criar()"
       [disabled]="!residentForm.valid"
     >
-      Salvar
+      {{ isEdit ? "Atualizar" : "Salvar" }}
     </button>
   </div>
 </div>

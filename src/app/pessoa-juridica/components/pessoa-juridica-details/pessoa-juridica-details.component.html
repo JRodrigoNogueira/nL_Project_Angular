@@ -1,0 +1,207 @@
+<div class="container">
+  <div class="info-wrapper">
+    <div class="title-wrapper">
+      <h1>iService</h1>
+      <mat-icon>info</mat-icon>
+    </div>
+
+    <div class="wrapper">
+      <h1>{{ isEdit ? "Atualizar Dados" : "Cadastro de Pessoa Juridica" }}</h1>
+    </div>
+
+    <form [formGroup]="pessoaJuridicaForm">
+      <div class="form">
+        <div
+          class="full-width"
+          fxLayout="row"
+          fxLayoutAlign="space-between"
+          id="linha1"
+        >
+          <mat-form-field fxFill appearance="outline" fxFlex="50%">
+            <mat-label> Nome </mat-label>
+            <input matInput type="text" formControlName="nome" id="nome" />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="40%">
+            <mat-label> Área de Atuação / Serviço </mat-label>
+            <input matInput type="text" formControlName="servico" id="servico" />
+          </mat-form-field>
+        </div>
+
+        <div
+          class="full-width"
+          fxLayout="row"
+          fxLayoutAlign="space-between"
+          id="linha2"
+        >
+          <mat-form-field fxFill appearance="outline" fxFlex="23.3%">
+            <mat-label> Inscrição Estadual </mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="inscricaoEstadual"
+              id="inscricaoEstadual"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="23.3%">
+            <mat-label> CNPJ </mat-label>
+            <input
+              formControlName="cnpj"
+              matInput
+              id="cnpj"
+              [textMask]="{ mask: cnpjMask }"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="23.3%">
+            <mat-label> Telefone 1 </mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="telefone1"
+              [textMask]="{ mask: telefoneMask }"
+              id="telefone1"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="23.3%">
+            <mat-label> Telefone 2 </mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="telefone2"
+              [textMask]="{ mask: telefoneMask }"
+              id="telefone2"
+            />
+          </mat-form-field>
+        </div>
+
+        <div
+          class="full-width"
+          fxLayout="row"
+          fxLayoutAlign="space-between"
+          id="linha4"
+        >
+          <mat-form-field fxFill appearance="outline" fxFlex="70%">
+            <mat-label> Endereco </mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="endereco"
+              id="endereco"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="20%">
+            <mat-label> Numero </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="numero"
+              id="numero"
+            />
+          </mat-form-field>
+        </div>
+
+        <div
+          class="full-width"
+          fxLayout="row"
+          fxLayoutAlign="space-between"
+          id="linha5"
+        >
+          <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
+            <mat-label> CEP </mat-label>
+            <input matInput type="text" formControlName="cep" id="cep" />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
+            <mat-label> Bairro </mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="bairro"
+              matInput
+              id="bairro"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
+            <mat-label> Cidade </mat-label>
+            <input matInput type="text" formControlName="cidade" id="cidade" />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
+            <mat-label> Estado </mat-label>
+            <input matInput type="text" formControlName="estado" id="estado" />
+          </mat-form-field>
+        </div>
+
+        <div
+          class="full-width"
+          fxLayout="row"
+          fxLayoutAlign="space-between"
+          id="linha6"
+        >
+          <mat-form-field fxFill appearance="outline" fxFlex="55%">
+            <mat-label> Email </mat-label>
+            <input matInput type="text" formControlName="email" id="email" />
+          </mat-form-field>
+
+          <mat-form-field fxFill appearance="outline" fxFlex="40%">
+            <mat-label> Senha </mat-label>
+            <input
+              matInput
+              type="password"
+              formControlName="senha"
+              id="senha"
+            />
+          </mat-form-field>
+        </div>
+
+        <div
+          class="full-width"
+          fxLayout="row"
+          fxLayoutAlign="space-between"
+          id="linha7"
+        >
+          <mat-form-field fxFill appearance="outline" fxFlex="100%">
+            <mat-label> URL Vídeo de Apresentação </mat-label>
+            <input matInput type="text" formControlName="video" id="video" />
+          </mat-form-field>
+        </div>
+
+        <div
+          class="full-width"
+          fxLayout="row"
+          fxLayoutAlign="space-between"
+          id="linha8"
+        >
+          <mat-form-field fxFill appearance="outline" fxFlex="100%">
+            <mat-label> Descrição </mat-label>
+            <input matInput type="text" formControlName="descricao" id="descricao" />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+
+    <div class="btns">
+      <button mat-raised-button class="grad" routerLink="">{{ isEdit ? "Deslogar" : "Voltar" }}</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="isEdit ? atualizar() : criar()"
+        [disabled]="!pessoaJuridicaForm.valid"
+      >
+        {{ isEdit ? "Atualizar" : "Criar" }}
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="isEdit ? excluir() : limpar()"
+      >
+        {{ isEdit ? "Excluir Conta" : "Limpar" }}
+      </button>
+    </div>
+  </div>
+</div>

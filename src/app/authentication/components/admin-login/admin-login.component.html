@@ -1,0 +1,62 @@
+<div
+  class="background"
+  fxLayout="row"
+  fxFlex="100"
+  fxLayoutAlign="center center"
+>
+  <div fxLayout="column" fxLayoutAlign="center center" class="login-container">
+    <div
+      fxFlex="85"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="20px"
+    >
+      <div class="title-wrapper">
+        <h1>iService</h1>
+        <mat-icon>info</mat-icon>
+      </div>
+
+      <h2>Administração</h2>
+
+      <form class="full-width" [formGroup]="loginFormPF">
+        <div class="form">
+          <div
+            class="full-width"
+            fxLayout="row"
+            fxLayoutAlign="space-between"
+            id="linha1"
+          >
+            <mat-form-field fxFill appearance="outline">
+              <mat-label> Email </mat-label>
+              <input matInput type="text" formControlName="email" id="email" />
+            </mat-form-field>
+          </div>
+
+          <div
+            class="full-width"
+            fxLayout="row"
+            fxLayoutAlign="space-between"
+            id="linha2"
+          >
+            <mat-form-field fxFill appearance="outline">
+              <mat-label> Senha </mat-label>
+              <input matInput type="text" formControlName="senha" id="senha" />
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+
+      <div class="login-buttons">
+        <button mat-raised-button routerLink="">Voltar</button>
+        <button mat-raised-button>Entrar</button>
+      </div>
+
+      <div class="login-admin">
+        <button routerLink="">
+          <span class="material-symbols-outlined"> arrow_back </span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

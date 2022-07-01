@@ -1,0 +1,48 @@
+<div class="page" fxLayout="column" fxLayoutGap="30px">
+  <h1>Consulta de Informações</h1>
+
+  <mat-divider></mat-divider>
+
+
+  <div class="center" fxLayoutGap="20px">
+
+    <mat-icon>key</mat-icon>
+    <mat-form-field fxFlex="20">
+      <mat-label>Placa do Veículo</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+
+    <mat-icon>people</mat-icon>
+    <mat-form-field fxFlex="40">
+      <mat-label>Morador</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+
+    <mat-icon>apartment</mat-icon>
+    <mat-form-field fxFlex="20">
+      <mat-label>Apartamento</mat-label>
+      <input matInput type="number" />
+    </mat-form-field>
+
+  </div>
+
+  <div class="center" fxLayoutGap="20px">
+
+    <button mat-raised-button color="primary" (click)="consultar()">Consultar</button>
+    <button mat-raised-button color="primary" routerLink="">Voltar</button>
+    <button mat-raised-button color="primary">Limpar</button>
+    <button mat-raised-button color="primary" routerLink="details"><mat-icon>add</mat-icon></button>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxFill appearance="outline" fxFlex="30%">
+    <mat-label> Apartamento </mat-label>
+    <select>
+    <option *ngFor="let apartment of apartments">{{ apartment.numeroAp }}</option>
+    </select>
+  </div>
+
+
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ResidentService } from '../../services/resident.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -10,13 +10,28 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class ResidentDetailsComponent implements OnInit {
 
+  isEdit = false;
+  residentId!: number;
+
   constructor(
     private residentService: ResidentService,
     private router: Router,
+    private route: ActivatedRoute,
     private form: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+
+    this.route.params.subscribe({
+      next: (params) => {
+        this.isEdit = params['id'] !== 'new';
+        this.residentId = params['id'];
+      },
+    });
+
+    if (this.isEdit) {
+      this.loadData();
+    }
 
   }
 
@@ -24,15 +39,16 @@ export class ResidentDetailsComponent implements OnInit {
     this.router.navigate([x])
   }
 
-  getData() {
-    /* let name: string = ""
-    name = document.getElementById("resident").innerText; */
-    console.log("teste");
-    this.residentService.getResidentByName("Rodrigo").subscribe({
-      next: (response) => {
+
+  loadData() {
+
+    this.residentService.getResidentById(this.residentId).subscribe({
+      next: (response) =>{
         console.log(response);
+        this.residentForm.patchValue(response);
       }
     });
+
   }
 
   residentForm = this.form.group({
@@ -48,14 +64,21 @@ export class ResidentDetailsComponent implements OnInit {
     idApartamento: [null,Validators.required]
   });
 
+
+  cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.',/\d/, /\d/, /\d/,  '-', /\d/, /\d/];
+  rgMask = [/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
+  telefoneMask =  ['(', /\d/, /\d/, ')', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+
+
   verForm(){
     console.log(this.residentForm.value);
   }
 
-  salvar() {
-    this.residentService.createVehicle(this.residentForm.value).subscribe({
-      next: (response) => {
-        console.log(response);
+  criar() {
+    const data = this.residentForm.value;
+    this.residentService.createResident(data).subscribe({
+      next: () => {
+        this.router.navigate(['/vehicle/new']);
       },
       error: (x) => {
         console.log(`Não foi possível salvar as informações. ${x}`)
@@ -63,11 +86,14 @@ export class ResidentDetailsComponent implements OnInit {
     });
   }
 
-  ler() {
-    console.log("teste");
-    this.residentService.getResidentByName("Mary").subscribe({
-      next: (response) => {
-        console.log(response);
+  atualizar() {
+    const data = this.residentForm.value;
+    this.residentService.updateResident(data, this.residentId).subscribe({
+      next: () => {
+        this.router.navigate(['/resident']);
+      },
+      error: (x) => {
+        console.log(`Não foi possível salvar as informações. ${x}`)
       }
     });
   }

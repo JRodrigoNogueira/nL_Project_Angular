@@ -3,28 +3,28 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="changePage('resident/details')"
+      (click)="changePage('resident/new')"
     >
       Moradores
     </button>
     <button
       mat-raised-button
       color="primary"
-      (click)="changePage('vehicle/details')"
+      (click)="changePage('vehicle/new')"
     >
       Veículos
     </button>
     <button
       mat-raised-button
       color="primary"
-      (click)="changePage('visitor/details')"
+      (click)="changePage('visitor/new')"
     >
       Visitantes
     </button>
     <button
       mat-raised-button
       color="accent"
-      (click)="changePage('employee/details')"
+      (click)="changePage('employee/new')"
     >
       Funcionarios
     </button>
@@ -46,7 +46,7 @@
         >
           <mat-form-field fxFill appearance="outline" fxFlex="30%">
             <mat-label> Apartamento </mat-label>
-            <input matInput type="text" formControlName="idApartamento" id="idApartamento" />
+            <input matInput type="number" formControlName="idApartamento" id="idApartamento" />
           </mat-form-field>
 
           <mat-form-field fxFill appearance="outline" fxFlex="65%">
@@ -62,7 +62,7 @@
         >
           <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
             <mat-label> RG </mat-label>
-            <input matInput type="text" formControlName="rg" id="rg" />
+            <input matInput type="text" formControlName="rg" id="rg" [textMask]="{ mask: rgMask }" />
           </mat-form-field>
 
           <mat-form-field fxFill appearance="outline" fxFlex="22.5%">
@@ -71,6 +71,7 @@
               matInput
               type="text"
               formControlName="cpf"
+              [textMask]="{ mask: cpfMask }"
               id="cpf"
             />
           </mat-form-field>
@@ -81,6 +82,7 @@
               matInput
               type="text"
               formControlName="telefone1"
+              [textMask]="{ mask: telefoneMask }"
               id="telefone1"
             />
           </mat-form-field>
@@ -91,6 +93,7 @@
               matInput
               type="text"
               formControlName="telefone2"
+              [textMask]="{ mask: telefoneMask }"
               id="telefone2"
             />
           </mat-form-field>
@@ -123,10 +126,10 @@
     <button
         mat-raised-button
         color="primary"
-        (click)="salvar()"
+        (click)="isEdit?atualizar():criar()"
         [disabled]="!employeeForm.valid"
       >
-        Salvar
+      {{ (isEdit?'Atualizar':'Salvar') }}
       </button>
   </div>
 </div>

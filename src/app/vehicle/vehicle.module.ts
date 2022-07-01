@@ -5,6 +5,7 @@ import { VehicleRoutingModule } from './vehicle-routing.module';
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { SharedModule } from '../shared/shared.module';
 import { VehiclePainelComponent } from './components/vehicle-painel/vehicle-painel.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { VehiclePainelComponent } from './components/vehicle-painel/vehicle-pain
     CommonModule,
     VehicleRoutingModule,
     SharedModule,
+    TextMaskModule,
   ]
 })
 export class VehicleModule { }

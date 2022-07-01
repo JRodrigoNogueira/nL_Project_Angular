@@ -29,18 +29,16 @@ export class VehicleService {
     return this.http.get<any>(`${environment.apiUrl}/veiculo/allVeiculos`, { params });
   }
 
-  /*
-  updateCustomer(formData: Object, id: number) {
-    return this.http.put<any>(`${environment.apiUrl}/api/customer/${id}`, formData);
+  deleteVehicle(id: number) {
+    return this.http.delete<any>(`${environment.apiUrl}/veiculo/${id}`);
   }
 
-  deleteCustomer(id: number) {
-    return this.http.delete<any>(`${environment.apiUrl}/api/customer/${id}`);
+  getVehicleById(id: number){
+    return this.http.get<any>(`${environment.apiUrl}/veiculo/${id}`);
   }
 
-  findCustomerByDescription(customer: Object) {
-    return this.http.get<any>(`${environment.apiUrl}/api/customer/findByDescription/`, customer);
-  } */
-
-
+  updateVehicle(formData: Object, id: number) {
+    return this.http.put<any>(`${environment.apiUrl}/veiculo/${id}`, formData);
+  }
+  
 }

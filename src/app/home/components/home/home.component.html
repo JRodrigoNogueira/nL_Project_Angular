@@ -1,17 +1,51 @@
-<div class="page">
-  <h1>Sistema de Controle de Acesso</h1>
+<div
+  class="background"
+  fxLayout="row"
+  fxFlex="100"
+  fxLayoutAlign="center center"
+>
+  <div fxLayout="column" fxLayoutAlign="center center" class="login-container">
+    <div
+      fxFlex="85"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="40px"
+      class="big"
+    >
+      <div class="title-wrapper">
+        <h1>iService</h1>
+        <mat-icon>info</mat-icon>
+      </div>
 
-  <h2>Condomínio New Life</h2>
-  <mat-divider></mat-divider>
-  <h3>O que você deseja fazer?</h3>
+      <div class="content-wrapper">
+        <div>
+          <h2>Falta pouco para localizar seu <br>Serviço ideal!</h2>
+          <h3>Como deseja continuar?</h3>
+        </div>
+        <div class="login-buttons">
+            <button mat-raised-button routerLink="login/pF">Pessoa Física</button>
+            <button mat-raised-button routerLink="login/pJ">Pessoa Jurídica</button>
+        </div>
+      </div>
 
-  <div
-    fxLayout="column"
-    fxLayoutGap="1rem"
-    fxLayoutAlign="space-around center"
-    class="full-width"
-  >
-    <button mat-raised-button color="primary" routerLink="./resident/details">Adicionar Morador</button>
-    <button mat-raised-button color="accent" routerLink="./resident">Consultar Morador</button>
+      <div class="content-wrapper">
+        <div>
+          <h2>Ainda não possui sua conta?</h2>
+          <h3>Crie agora mesmo!</h3>
+        </div>
+        <div class="login-buttons">
+          <button mat-raised-button routerLink="pF/new">Pessoa Física</button>
+          <button mat-raised-button routerLink="pJ/new">Pessoa Jurídica</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="login-admin">
+    <button routerLink="login/admin">
+      <span class="material-symbols-outlined">
+        settings
+        </span>
+    </button>
   </div>
 </div>

@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 38px;
+  margin: 0;
+  padding-block: 30px;
+}
+
+.container {
+  background: url(https://cedem.com.br/2017/wp-content/uploads/2019/06/Background-site-04.jpg);
+  width: 100%;
+  height: calc( 100vh - 64.5px);
+}
+
+.info-wrapper {
+  background-color: white;
+  border-radius: 8px;
+
+  border: 3px solid black;
+
+  width: 50%;
+}
+
+#comentario {
+  height: 100px;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.title-wrapper {
+  display: flex;
+  color: white;
+  justify-content: center;
+
+  width: 100%;
+
+  align-items: center;
+  gap: 10px;
+
+  background-image: linear-gradient(to right, #1363DF, #06283D);
+
+  border-bottom: 3px solid black;
+}
+
+.grad {
+  background-image: linear-gradient(to right, #1363DF, #06283D);
+  color: white;
+}

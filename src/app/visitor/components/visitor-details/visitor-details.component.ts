@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VisitorService } from '../../services/visitor.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -10,13 +10,33 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class VisitorDetailsComponent implements OnInit {
 
+  isEdit = false;
+  residentId!: number;
+
+  cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.',/\d/, /\d/, /\d/,  '-', /\d/, /\d/];
+  rgMask = [/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
+  telefoneMask =  ['(', /\d/, /\d/, ')', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+
   constructor(
     private visitorService: VisitorService,
     private router: Router,
+    private route: ActivatedRoute,
     private form: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+
+    this.route.params.subscribe({
+      next: (params) => {
+        this.isEdit = params['id'] !== 'new';
+        this.residentId = params['id'];
+      },
+    });
+
+    if (this.isEdit) {
+      this.loadData();
+    }
+
   }
 
   changePage(x: string){
@@ -37,10 +57,10 @@ export class VisitorDetailsComponent implements OnInit {
     console.log(this.visitorForm.value);
   }
 
-  salvar() {
+  criar() {
     this.visitorService.createVisitor(this.visitorForm.value).subscribe({
       next: (response) => {
-        console.log(response);
+        this.router.navigate(['/employee/new']);
       },
       error: (x) => {
         console.log(`Não foi possível salvar as informações. ${x}`)
@@ -48,11 +68,24 @@ export class VisitorDetailsComponent implements OnInit {
     });
   }
 
-  ler() {
-    console.log("teste");
-    this.visitorService.getVisitorByName("Mary").subscribe({
-      next: (response) => {
-        console.log(response);
+  loadData() {
+
+    this.visitorService.getVisitorById(this.residentId).subscribe({
+      next: (response) =>{
+        this.visitorForm.patchValue(response);
+      }
+    });
+
+  }
+
+  atualizar() {
+    const data = this.visitorForm.value;
+    this.visitorService.updateVisitor(data, this.residentId).subscribe({
+      next: () => {
+        this.router.navigate(['/visitor']);
+      },
+      error: (x) => {
+        console.log(`Não foi possível salvar as informações. ${x}`)
       }
     });
   }

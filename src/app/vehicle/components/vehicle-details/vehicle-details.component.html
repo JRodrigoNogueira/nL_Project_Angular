@@ -3,28 +3,28 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="changePage('resident/details')"
+      (click)="changePage('resident/new')"
     >
       Moradores
     </button>
     <button
       mat-raised-button
       color="accent"
-      (click)="changePage('vehicle/details')"
+      (click)="changePage('vehicle/new')"
     >
       Veículos
     </button>
     <button
       mat-raised-button
       color="primary"
-      (click)="changePage('visitor/details')"
+      (click)="changePage('visitor/new')"
     >
       Visitantes
     </button>
     <button
       mat-raised-button
       color="primary"
-      (click)="changePage('employee/details')"
+      (click)="changePage('employee/new')"
     >
       Funcionarios
     </button>
@@ -90,10 +90,10 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="salvar()"
+      (click)="isEdit?atualizar():criar()"
       [disabled]="!vehicleForm.valid"
     >
-      Salvar
+    {{ (isEdit?'Atualizar':'Salvar') }}
     </button>
   </div>
 </div>

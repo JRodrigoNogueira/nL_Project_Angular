@@ -5,6 +5,7 @@ import { VisitorRoutingModule } from './visitor-routing.module';
 import { VisitorDetailsComponent } from './components/visitor-details/visitor-details.component';
 import { VisitorPainelComponent } from './components/visitor-painel/visitor-painel.component';
 import { SharedModule } from '../shared/shared.module';
+import { TextMaskModule } from 'angular2-text-mask';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     VisitorRoutingModule,
-    SharedModule
+    SharedModule,
+    TextMaskModule,
   ]
 })
 export class VisitorModule { }

@@ -70,8 +70,18 @@ export class EmployeePainelComponent implements OnInit {
 
   }
 
-  deletar(n: number) {
-    console.log(n);
+  deletar(data: any) {
+    if (confirm(`Confirma a deleção do funcionário ${data.funcionario}?`)){
+      this.employeeService.deleteEmployee(data.id).subscribe({
+        next: () => {
+          this.pageChange({
+            pageIndex: this.page,
+            pageSize: this.pageSize,
+            length: this.totalLength,
+          });
+        },
+      });
+    }
   }
 
 

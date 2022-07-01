@@ -29,5 +29,15 @@ export class VisitorService {
     return this.http.get<any>(`${environment.apiUrl}/visitante/allVisitantes`, { params });
   }
 
+  deleteVisitor(id: number) {
+    return this.http.delete<any>(`${environment.apiUrl}/visitante/${id}`);
+  }
 
+  getVisitorById(id: number){
+    return this.http.get<any>(`${environment.apiUrl}/visitante/${id}`);
+  }
+
+  updateVisitor(formData: Object, id: number) {
+    return this.http.put<any>(`${environment.apiUrl}/visitante/${id}`, formData);
+  }
 }
